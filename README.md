@@ -5,7 +5,7 @@ Install **.NET SDK**, **ASP.NET Runtime** and **Docker**, in order to install **
 ### Arch
 
 ```sh 
-    sudo pacman -S dotnet-sdk aspnet-runtime
+sudo pacman -S dotnet-sdk aspnet-runtime
 ```
 
 ## Setup
@@ -13,25 +13,25 @@ Install **.NET SDK**, **ASP.NET Runtime** and **Docker**, in order to install **
 Copy **.env** and fill it in
 
 ```sh
-    cp example.env .env
+cp example.env .env
 ```
 
 Start the **docker compose**
 
 ```sh
-    docker-compose build
+docker-compose build
 
-    docker-compose up -d
+docker-compose up -d
 ```
 
 or (depending on **docker** version)
 
 ```sh
-    docker compose build
+docker compose build
 
-    docker compose up -d
+docker compose up -d
 ```
 
 ## Contributing
 
-Before contributing see [C/CONTRIBUTING.md](./CONTRIBUTING.md)
+Before contributing see [CONTRIBUTING.md](./CONTRIBUTING.md)
