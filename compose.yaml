@@ -1,9 +1,15 @@
 ﻿services:
-  ispire.web:
+  backend:
     image: ispire.web
     build:
       context: .
       dockerfile: ISpire.Web/Dockerfile
     ports:
-      - 8080:8080
+      - 5000:8080
 
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    env_file:
+      - .env
