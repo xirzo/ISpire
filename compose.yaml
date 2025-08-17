@@ -4,4 +4,6 @@
     build:
       context: .
       dockerfile: ISpire.Web/Dockerfile
+    ports:
+      - 8080:8080
 
