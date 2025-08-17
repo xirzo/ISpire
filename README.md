@@ -23,16 +23,16 @@ echo "Host=db;Port=5432;Database=your_db_name;Username=your_db_user;Password=you
 Start the **docker compose**
 
 ```sh
-docker-compose build
+docker-compose --file compose.dev.yaml build
 
-docker-compose up -d
+docker-compose --file compose.dev.yaml up -d
 ```
 
 or (depending on **Docker** version)
 
 ```sh
-docker compose build
+docker compose --file compose.dev.yaml build
 
-docker compose up -d
+docker compose --file compose.dev.yaml up -d
 ```
 

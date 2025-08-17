@@ -5,6 +5,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{055E1408-1B8B-462B-8319-F12C3ED3E54C}"
 	ProjectSection(SolutionItems) = preProject
 		compose.yaml = compose.yaml
+		compose.dev.yaml = compose.dev.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISpire.IO", "ISpire.IO\ISpire.IO.csproj", "{EAF4C2F2-7814-4B76-B082-FC7A90C0ACB1}"

@@ -1,0 +1,41 @@
+﻿services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./ISpire.Web/Dockerfile.dev
+    ports:
+      - 5000:8080
+    secrets:
+      - db_connection_string
+    environment:
+      DB_CONNECTION_STRING: /run/secrets/db_connection_string
+    volumes:
+      - ./ISpire.Web:/app/ISpire.Web
+      - ./ISpire.Core:/app/ISpire.Core
+      - ./ISpire.IO:/app/ISpire.IO
+      - ./ISpire.sln:/app/ISpire.sln
+    command: >
+      dotnet watch --project /app/ISpire.Web/ISpire.Web.csproj run --urls=http://0.0.0.0:8080
+
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    secrets:
+      - db_password
+      - db_user
+      - db_name
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_USER_FILE: /run/secrets/db_user
+      POSTGRES_DB_FILE: /run/secrets/db_name
+
+secrets:
+  db_connection_string:
+    file: db_connection_string.txt
+  db_password:
+    file: db_password.txt
+  db_user:
+    file: db_user.txt
+  db_name:
+    file: db_name.txt
