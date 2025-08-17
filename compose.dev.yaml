@@ -14,8 +14,14 @@
       - ./ISpire.Core:/app/ISpire.Core
       - ./ISpire.IO:/app/ISpire.IO
       - ./ISpire.sln:/app/ISpire.sln
+      - /app/ISpire.Web/bin
+      - /app/ISpire.Web/obj
+      - /app/ISpire.Core/bin
+      - /app/ISpire.Core/obj
+      - /app/ISpire.IO/bin
+      - /app/ISpire.IO/obj
     command: >
-      dotnet watch --project /app/ISpire.Web/ISpire.Web.csproj run --urls=http://0.0.0.0:8080
+      dotnet watch --no-hot-reload --project /app/ISpire.Web/ISpire.Web.csproj run --urls=http://0.0.0.0:8080
 
   db:
     image: postgres
