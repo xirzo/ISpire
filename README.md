@@ -10,11 +10,15 @@ sudo pacman -S dotnet-sdk aspnet-runtime
 
 ## Setup
 
-Copy **.env** and fill it in
+Create **secrets**, you may obtain them from your team members
 
 ```sh
-cp example.env .env
+echo "your_db_password" > db_password.txt
+echo "your_db_user" > db_user.txt
+echo "your_db_name" > db_name.txt
+echo "Host=db;Port=5432;Database=your_db_name;Username=your_db_user;Password=your_db_password" > secrets/db_connection_string.txt
 ```
+
 
 Start the **docker compose**
 
@@ -24,7 +28,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-or (depending on **docker** version)
+or (depending on **Docker** version)
 
 ```sh
 docker compose build
@@ -32,6 +36,3 @@ docker compose build
 docker compose up -d
 ```
 
-## Contributing
-
-Before contributing see [CONTRIBUTING.md](./CONTRIBUTING.md)

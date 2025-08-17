@@ -4,12 +4,17 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
-**/.env
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
 
+**/.env
+
+**/db_name.txt
+**/db_connection_string.txt
+**/db_password.txt
+**/db_user.txt
 
 bin/
 obj/
