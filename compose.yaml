@@ -1,0 +1,7 @@
+﻿services:
+  ispire.web:
+    image: ispire.web
+    build:
+      context: .
+      dockerfile: ISpire.Web/Dockerfile
+
