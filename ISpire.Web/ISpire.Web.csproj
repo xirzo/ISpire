@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ISpire.IO\ISpire.IO.csproj" />
+      <ProjectReference Include="..\ISpire.Infrastructure\ISpire.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
