@@ -31,6 +31,8 @@
       - db_password
       - db_user
       - db_name
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
       POSTGRES_USER_FILE: /run/secrets/db_user
