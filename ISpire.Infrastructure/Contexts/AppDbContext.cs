@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace ISpire.IO.Contexts;
+namespace ISpire.Infrastructure.Contexts;
 
 public class AppDbContext : DbContext
 {

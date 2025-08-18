@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		compose.dev.yaml = compose.dev.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISpire.IO", "ISpire.IO\ISpire.IO.csproj", "{EAF4C2F2-7814-4B76-B082-FC7A90C0ACB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISpire.Infrastructure", "ISpire.Infrastructure\ISpire.Infrastructure.csproj", "{EAF4C2F2-7814-4B76-B082-FC7A90C0ACB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISpire.Core", "ISpire.Core\ISpire.Core.csproj", "{0544542A-F04A-43E9-86DD-C80651270009}"
 EndProject
