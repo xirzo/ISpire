@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Configurations\" />
+      <ProjectReference Include="..\ISpire.Core\ISpire.Core.csproj" />
     </ItemGroup>
 
 </Project>
