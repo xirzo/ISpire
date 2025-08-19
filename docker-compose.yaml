@@ -5,10 +5,11 @@
       context: .
       dockerfile: ISpire.Web/Dockerfile
     ports:
-      - 5000:8080
+      - 6000:6000
     secrets:
       - db_connection_string
     environment:
+      ASPNETCORE_HTTP_PORTS: 6000
       DB_CONNECTION_STRING: /run/secrets/db_connection_string
 
   db:
