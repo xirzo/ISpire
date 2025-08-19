@@ -1,8 +1,22 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:9.0
-WORKDIR /app
+WORKDIR /workspace
+
 COPY ISpire.sln ./
 COPY ISpire.Web/ISpire.Web.csproj ISpire.Web/
 COPY ISpire.Core/ISpire.Core.csproj ISpire.Core/
 COPY ISpire.Infrastructure/ISpire.Infrastructure.csproj ISpire.Infrastructure/
-RUN dotnet restore ISpire.Web/ISpire.Web.csproj
-CMD ["dotnet", "watch", "--project", "ISpire.Web/ISpire.Web.csproj", "run", "--urls=http://0.0.0.0:8080"]
+
+RUN dotnet restore ISpire.sln
+
+COPY . .
+
+WORKDIR /workspace/ISpire.Web
+
+EXPOSE 6000
+
+ENV ASPNETCORE_ENVIRONMENT=Development \
+    ASPNETCORE_URLS=http://0.0.0.0:6000 \
+    DOTNET_USE_POLLING_FILE_WATCHER=1 \
+    DOTNET_WATCH_RESTART_ON_RUDE_EDIT=1
+
+ENTRYPOINT ["dotnet", "watch", "run", "--project", "/workspace/ISpire.Web/ISpire.Web.csproj", "--no-hot-reload"]
