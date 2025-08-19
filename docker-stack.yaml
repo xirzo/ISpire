@@ -1,0 +1,40 @@
+﻿services:
+  backend:
+    image: ghcr.io/xirzo/ispire-backend:latest
+    ports:
+      - 6000:6000
+    secrets:
+      - db_connection_string
+    environment:
+      ASPNETCORE_HTTP_PORTS: 6000
+      DB_CONNECTION_STRING: /run/secrets/db_connection_string
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    secrets:
+      - db_password
+      - db_user
+      - db_name
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_USER_FILE: /run/secrets/db_user
+      POSTGRES_DB_FILE: /run/secrets/db_name
+
+secrets:
+  db_connection_string:
+    external: true
+  db_password:
+    external: true
+  db_user:
+    external: true
+  db_name:
+    external: true
+
+volumes:
+  db_data:
