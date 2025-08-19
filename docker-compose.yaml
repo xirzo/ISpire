@@ -1,27 +1,37 @@
 ﻿services:
   backend:
-    image: ispire.web
     build:
       context: .
-      dockerfile: ISpire.Web/Dockerfile
+      dockerfile: ISpire.Web/Dockerfile.dev
+    image: ispire.web:dev
     ports:
-      - 6000:6000
+      - "6000:6000"
     secrets:
       - db_connection_string
     environment:
       ASPNETCORE_HTTP_PORTS: 6000
       DB_CONNECTION_STRING: /run/secrets/db_connection_string
+    depends_on:
+      - db
+    volumes:
+      - ./:/workspace
+      - /workspace/ISpire.Web/bin
+      - /workspace/ISpire.Web/obj
+      - /workspace/ISpire.Core/bin
+      - /workspace/ISpire.Core/obj
+      - /workspace/ISpire.Infrastructure/bin
+      - /workspace/ISpire.Infrastructure/obj
 
   db:
     image: postgres
-    restart: always
+    restart: unless-stopped
     shm_size: 128mb
     secrets:
       - db_password
       - db_user
       - db_name
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
       POSTGRES_USER_FILE: /run/secrets/db_user
