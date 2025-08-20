@@ -2,11 +2,10 @@
   backend:
     image: ghcr.io/xirzo/ispire-backend:latest
     ports:
-      - 6000:6000
+      - 8041:8041
     secrets:
       - db_connection_string
     environment:
-      ASPNETCORE_HTTP_PORTS: 6000
       DB_CONNECTION_STRING: /run/secrets/db_connection_string
       JWT_KEY: /run/secrets/jwt_key
       JWT_ISSUER: /run/secrets/jwt_issuer
