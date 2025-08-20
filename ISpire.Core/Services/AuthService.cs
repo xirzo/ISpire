@@ -39,7 +39,7 @@ public class AuthService
             return new RegisterResult.AlreadyExists();
         }
         
-        var account = await _accountRepository.Add(Guid.NewGuid(), name, email, BCrypt.Net.BCrypt.HashPassword(password));
+        var account = await _accountRepository.Add(name, email, BCrypt.Net.BCrypt.HashPassword(password));
 
         if (account == null)
         {
