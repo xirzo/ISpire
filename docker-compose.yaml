@@ -5,15 +5,9 @@
       dockerfile: ISpire.Web/Dockerfile.dev
     image: ispire.web:dev
     ports:
-      - "6000:6000"
-    secrets:
-      - db_connection_string
-    environment:
-      ASPNETCORE_HTTP_PORTS: 6000
-      DB_CONNECTION_STRING: /run/secrets/db_connection_string
-      JWT_KEY: /run/secrets/jwt_key
-      JWT_ISSUER: /run/secrets/jwt_issuer
-      JWT_AUDIENCE: /run/secrets/jwt_audience
+      - "7000:6000"
+    env_file:
+        - .env
     depends_on:
       - db
     volumes:
@@ -29,29 +23,9 @@
     image: postgres
     restart: unless-stopped
     shm_size: 128mb
-    secrets:
-      - db_password
-      - db_user
-      - db_name
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
-      POSTGRES_USER_FILE: /run/secrets/db_user
-      POSTGRES_DB_FILE: /run/secrets/db_name
-
-secrets:
-  db_connection_string:
-    file: db_connection_string.txt
-  db_password:
-    file: db_password.txt
-  db_user:
-    file: db_user.txt
-  db_name:
-    file: db_name.txt
-  jwt_key:
-    file: jwt_key.txt
-  jwt_issuer:
-    file: jwt_issuer.txt
-  jwt_audience:
-    file: jwt_audience.txt
+      POSTGRES_DB: dbname
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass
