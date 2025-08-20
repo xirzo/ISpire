@@ -7,8 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Entities\" />
-      <Folder Include="Repositories\" />
+      <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+      <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.14.0" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
     </ItemGroup>
 
 </Project>

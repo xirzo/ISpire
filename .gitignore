@@ -11,11 +11,6 @@
 
 **/.env
 
-**/db_name.txt
-**/db_connection_string.txt
-**/db_password.txt
-**/db_user.txt
-
 bin/
 obj/
 /packages/

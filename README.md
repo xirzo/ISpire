@@ -10,29 +10,29 @@ sudo pacman -S dotnet-sdk aspnet-runtime
 
 ## Setup
 
-Create **secrets**, you may obtain them from your team members
+Copy **backend.env** file, key inserted in it is for development only. It is not used in production.
+
+> ![NOTE]
+> Appliction should work with default backend.env
 
 ```sh
-echo "your_db_password" > db_password.txt
-echo "your_db_user" > db_user.txt
-echo "your_db_name" > db_name.txt
-echo "Host=db;Port=5432;Database=your_db_name;Username=your_db_user;Password=your_db_password" > db_connection_string.txt
+cp backend.env .env
 ```
 
 
 Start the **docker compose**
 
 ```sh
-docker-compose --file compose.dev.yaml build
+docker-compose buill
 
-docker-compose --file compose.dev.yaml up -d
+docker-compose up -d
 ```
 
 or (depending on **Docker** version)
 
 ```sh
-docker compose --file compose.dev.yaml build
+docker compose build
 
-docker compose --file compose.dev.yaml up -d
+docker compose up -d
 ```
 
