@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using ISpire.Core.Repositories;
 using ISpire.Core.Services;
 using ISpire.Infrastructure.Contexts;
@@ -5,15 +6,12 @@ using ISpire.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
-var connectionStringPath = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 
-if (connectionStringPath == null)
+if (connectionString == null)
 {
-    Console.WriteLine("Connection string is not found");
-    return;
+    throw new InvalidOperationException("Database connection string environment variable (DB_CONNECTION_STRING) is not set.");
 }
-
-var connectionString = File.ReadAllText(connectionStringPath).Trim();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +20,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<IAccountRepository, DbAccountRepository>();
 
 builder.Services.AddOpenApi();
-builder.Services.AddDbContext<AppDbContext>(options => 
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 builder.Services.AddControllers();
