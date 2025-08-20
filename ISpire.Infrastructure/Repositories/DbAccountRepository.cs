@@ -1,6 +1,7 @@
 using ISpire.Core.Entities;
 using ISpire.Core.Repositories;
 using ISpire.Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace ISpire.Infrastructure.Repositories;
 
@@ -13,23 +14,33 @@ public class DbAccountRepository : IAccountRepository
         _dbContext = dbContext;
     }
 
-    public Task<Account?> Add(Guid guid, string name, string email, string passwordHash)
+    public async Task<Account?> Add(string name, string email, string passwordHash)
     {
-        throw new NotImplementedException();
+        var account = new Account
+        {
+            Guid = Guid.NewGuid(),
+            Name = name,
+            Email = email,
+            PasswordHash = passwordHash
+        };
+        
+        await _dbContext.Accounts.AddAsync(account);
+        await _dbContext.SaveChangesAsync();
+        return account;
     }
 
-    public Task<Account?> FindByGuid(Guid guid)
+    public async Task<Account?> FindByGuid(Guid guid)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Accounts.FirstOrDefaultAsync(account => account.Guid == guid);
     }
 
-    public Task<Account?> FindByEmail(string email)
+    public async Task<Account?> FindByEmail(string email)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Accounts.FirstOrDefaultAsync(account => account.Email == email);
     }
 
-    public Task<Account?> FindByName(string email)
+    public async Task<Account?> FindByName(string name)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Accounts.FirstOrDefaultAsync(account => account.Name == name);
     }
 }
