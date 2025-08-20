@@ -5,11 +5,10 @@
       dockerfile: ISpire.Web/Dockerfile.dev
     image: ispire.web:dev
     ports:
-      - "6000:6000"
+      - "7000:6000"
     secrets:
       - db_connection_string
     environment:
-      ASPNETCORE_HTTP_PORTS: 6000
       DB_CONNECTION_STRING: /run/secrets/db_connection_string
     depends_on:
       - db
