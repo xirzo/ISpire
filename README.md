@@ -53,7 +53,7 @@ docker swarm init
 ```
 
 Deploy to the VPS
-```
+
 ```sh
 docker stack deploy -c ispire ispire-backend
 ```
