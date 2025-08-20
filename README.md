@@ -12,7 +12,7 @@ sudo pacman -S dotnet-sdk aspnet-runtime
 
 Copy **backend.env** file, key inserted in it is for development only. It is not used in production.
 
->![NOTE]
+>[!NOTE]
 > Appliction should work with default backend.env
 
 ```sh
@@ -55,5 +55,5 @@ docker swarm init
 Deploy to the VPS
 
 ```sh
-docker stack deploy -c ispire ispire-backend
+docker stack deploy -c docker-stack.yaml ispire-backend
 ```
