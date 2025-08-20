@@ -11,6 +11,9 @@
     environment:
       ASPNETCORE_HTTP_PORTS: 6000
       DB_CONNECTION_STRING: /run/secrets/db_connection_string
+      JWT_KEY: /run/secrets/jwt_key
+      JWT_ISSUER: /run/secrets/jwt_issuer
+      JWT_AUDIENCE: /run/secrets/jwt_audience
     depends_on:
       - db
     volumes:
@@ -46,3 +49,9 @@ secrets:
     file: db_user.txt
   db_name:
     file: db_name.txt
+  jwt_key:
+    file: jwt_key.txt
+  jwt_issuer:
+    file: jwt_issuer.txt
+  jwt_audience:
+    file: jwt_audience.txt
