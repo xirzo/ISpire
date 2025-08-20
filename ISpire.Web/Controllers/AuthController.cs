@@ -36,7 +36,7 @@ public class AuthController : ControllerBase
 
         return result switch
         {
-            LoginResult.Success token => Ok(new { Token = token}),
+            LoginResult.Success token => Ok(new { token.Token}),
             LoginResult.AccountNotFound => NotFound(new { message = "Account not found"}),
             LoginResult.WrongPassword=> Unauthorized(new { message = "Password is wrong"}),
             _ => BadRequest()
