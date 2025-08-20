@@ -36,3 +36,24 @@ docker compose build
 docker compose up -d
 ```
 
+## Deploy on server
+
+Create context to execute **Docker** commands as if you were on VPS.
+```sh
+docker context create ispire --host=ssh;://<username>@<ip>
+```
+
+Use that context.
+```sh
+docker context use ispire
+```
+
+```sh
+docker swarm init
+```
+
+Deploy to the VPS
+```
+```sh
+docker stack deploy -c ispire ispire-backend
+```
