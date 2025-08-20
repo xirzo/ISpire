@@ -34,7 +34,7 @@ public class AuthService
         var emailAccount = await _accountRepository.FindByEmail(email);
         var nameAccount = await _accountRepository.FindByName(name);
 
-        if (emailAccount == null || nameAccount == null)
+        if (emailAccount != null || nameAccount != null)
         {
             return new RegisterResult.AlreadyExists();
         }
