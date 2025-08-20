@@ -11,14 +11,6 @@
 
 **/.env
 
-**/db_name.txt
-**/db_connection_string.txt
-**/db_password.txt
-**/db_user.txt
-**/jwt_key.txt
-**/jwt_issuer.txt
-**/jwt_audience.txt
-
 bin/
 obj/
 /packages/
