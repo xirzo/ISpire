@@ -1,26 +1,26 @@
 ﻿services:
   backend:
-    image: ispire.web
-    build:
-      context: .
-      dockerfile: ISpire.Web/Dockerfile
+    image: ghcr.io/xirzo/ispire-backend:latest
     ports:
-      - 5000:8080
+      - 6000:6000
     secrets:
       - db_connection_string
     environment:
+      ASPNETCORE_HTTP_PORTS: 6000
       DB_CONNECTION_STRING: /run/secrets/db_connection_string
+    depends_on:
+      - db
 
   db:
-    image: postgres
-    restart: always
-    shm_size: 128mb
+    image: postgres:latest
     secrets:
       - db_password
       - db_user
       - db_name
     ports:
       - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
       POSTGRES_USER_FILE: /run/secrets/db_user
@@ -28,10 +28,13 @@
 
 secrets:
   db_connection_string:
-    file: db_connection_string.txt
+    external: true
   db_password:
-    file: db_password.txt
+    external: true
   db_user:
-    file: db_user.txt
+    external: true
   db_name:
-    file: db_name.txt
+    external: true
+
+volumes:
+  db_data:
