@@ -7,7 +7,7 @@ public abstract record RegisterResult
 {
     public record AlreadyExists : RegisterResult;
     public record RepositoryAddFailed: RegisterResult;
-    public record Success(Account account) : RegisterResult;
+    public record Success(Account Account) : RegisterResult;
 }
 
 
@@ -61,7 +61,7 @@ public class AuthService
         
         if (BCrypt.Net.BCrypt.Verify(password, account.PasswordHash) == false)
         {
-            return new LoginResult.AccountNotFound();
+            return new LoginResult.WrongPassword();
         }
 
         var token = _jwtService.GenerateJwtToken(account);
