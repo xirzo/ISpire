@@ -1,3 +1,4 @@
+using ISpire.Core.Errors;
 using ISpire.Core.Services;
 using ISpire.Web.Dtos;
 using Microsoft.AspNetCore.Mvc;

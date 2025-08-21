@@ -1,25 +1,8 @@
 using System.Text.RegularExpressions;
-using ISpire.Core.Entities;
+using ISpire.Core.Errors;
 using ISpire.Core.Repositories;
 
 namespace ISpire.Core.Services;
-
-public abstract record RegisterResult
-{
-    public record AlreadyExists : RegisterResult;
-    public record WrongEmailPattern: RegisterResult;
-    public record RepositoryAddFailed: RegisterResult;
-    public record Success(Account Account) : RegisterResult;
-    public record ForbiddenCharactersInName : RegisterResult;
-}
-
-
-public abstract record LoginResult
-{
-    public record AccountNotFound : LoginResult;
-    public record WrongPassword: LoginResult;
-    public record Success(string Token) : LoginResult;
-}
 
 public class AuthService
 {
@@ -61,7 +44,6 @@ public class AuthService
 
         return new RegisterResult.Success(account);
     }
-    
     
     public async Task<LoginResult> Login(string email, string password)
     {
