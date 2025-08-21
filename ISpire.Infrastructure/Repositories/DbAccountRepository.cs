@@ -21,7 +21,8 @@ public class DbAccountRepository : IAccountRepository
             Guid = Guid.NewGuid(),
             Name = name,
             Email = email,
-            PasswordHash = passwordHash
+            PasswordHash = passwordHash,
+            Permissions = [],
         };
         
         await _dbContext.Accounts.AddAsync(account);
@@ -42,5 +43,17 @@ public class DbAccountRepository : IAccountRepository
     public async Task<Account?> FindByName(string name)
     {
         return await _dbContext.Accounts.FirstOrDefaultAsync(account => account.Name == name);
+    }
+
+    public async Task<ICollection<string>?> GetPermissionsByGuid(Guid guid)
+    {
+        var account = await _dbContext.Accounts.FirstOrDefaultAsync(account => account.Guid == guid);
+
+        if (account == null)
+        {
+            return null;
+        }
+        
+        return account.Permissions;
     }
 }
