@@ -23,6 +23,7 @@ public class AuthController : ControllerBase
         return result switch
         {
             RegisterResult.Success => Ok(new {message = "Registration Successful"}),
+            RegisterResult.WrongEmailPattern=> Conflict(new { message = "Wrong email pattern"}),
             RegisterResult.RepositoryAddFailed => Conflict(new { message = "Failed to add user to repository"}),
             RegisterResult.AlreadyExists => BadRequest(new { message = "User already exists"}),
             _ => BadRequest()

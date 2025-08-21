@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using ISpire.Core.Entities;
 using ISpire.Core.Repositories;
 
@@ -6,6 +7,7 @@ namespace ISpire.Core.Services;
 public abstract record RegisterResult
 {
     public record AlreadyExists : RegisterResult;
+    public record WrongEmailPattern: RegisterResult;
     public record RepositoryAddFailed: RegisterResult;
     public record Success(Account Account) : RegisterResult;
 }
@@ -31,6 +33,11 @@ public class AuthService
 
     public async Task<RegisterResult> Register(string name, string email, string password)
     {
+        if (Regex.Match(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$") is not { Success: true })
+        {
+            return new RegisterResult.WrongEmailPattern();
+        }
+        
         var emailAccount = await _accountRepository.FindByEmail(email);
         var nameAccount = await _accountRepository.FindByName(name);
 
