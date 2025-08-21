@@ -1,10 +1,12 @@
 using System.Diagnostics;
 using System.Text;
+using ISpire.Core.Entities;
 using ISpire.Core.Helpers;
 using ISpire.Core.Repositories;
 using ISpire.Core.Services;
 using ISpire.Infrastructure.Contexts;
 using ISpire.Infrastructure.Repositories;
+using ISpire.Web.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -50,6 +52,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
         };
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(Permissions.Create, policy => policy.Requirements.Add(new PermissionRequirements(Permissions.Create)));
+    options.AddPolicy(Permissions.Delete, policy => policy.Requirements.Add(new PermissionRequirements(Permissions.Delete)));
+});
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
