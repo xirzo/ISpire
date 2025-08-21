@@ -3,6 +3,7 @@ using System.Text;
 using ISpire.Core.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using ISpire.Core.Helpers;
 
 namespace ISpire.Core.Services;
 
@@ -16,10 +17,10 @@ public class JwtService
             new Claim(ClaimTypes.Email, account.Email),
             new Claim(ClaimTypes.Name, account.Name),
         };
-        
-        var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
-        var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
-        var audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+
+        var jwtKey = EnvironmentHelper.GetEnvironmentVariableOrFile("JWT_KEY");
+        var issuer = EnvironmentHelper.GetEnvironmentVariableOrFile("JWT_ISSUER");
+        var audience = EnvironmentHelper.GetEnvironmentVariableOrFile("JWT_AUDIENCE");
 
         if (string.IsNullOrEmpty(jwtKey) || string.IsNullOrEmpty(issuer) || string.IsNullOrEmpty(audience))
         {
@@ -36,7 +37,7 @@ public class JwtService
             expires: DateTime.UtcNow.AddHours(2),
             signingCredentials: credentials
         );
-        
+
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }

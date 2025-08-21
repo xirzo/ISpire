@@ -4,38 +4,15 @@
     ports:
       - 8041:8041
     secrets:
-      - db_connection_string
+      - ispire_db_connection_string
     environment:
-      DB_CONNECTION_STRING: /run/secrets/db_connection_string
+      DB_CONNECTION_STRING: /run/secrets/ispire_db_connection_string
       JWT_KEY: /run/secrets/jwt_key
       JWT_ISSUER: /run/secrets/jwt_issuer
       JWT_AUDIENCE: /run/secrets/jwt_audience
-    depends_on:
-      - db
-
-  db:
-    image: postgres:latest
-    secrets:
-      - db_password
-      - db_user
-      - db_name
-    ports:
-      - 5432:5432
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
-      POSTGRES_USER_FILE: /run/secrets/db_user
-      POSTGRES_DB_FILE: /run/secrets/db_name
 
 secrets:
-  db_connection_string:
-    external: true
-  db_password:
-    external: true
-  db_user:
-    external: true
-  db_name:
+  ispire_db_connection_string:
     external: true
   jwt_key:
     external: true
@@ -43,6 +20,3 @@ secrets:
     external: true
   jwt_audience:
     external: true
-
-volumes:
-  db_data:

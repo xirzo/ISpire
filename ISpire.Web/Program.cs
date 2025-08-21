@@ -16,13 +16,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-    
+    var connectionString = EnvironmentHelper.GetEnvironmentVariableOrFile("DB_CONNECTION_STRING");
+
     if (string.IsNullOrWhiteSpace(connectionString))
     {
         throw new InvalidOperationException("DB_CONNECTION_STRING not set.");
     }
-    
+
     options.UseNpgsql(connectionString);
 });
 
