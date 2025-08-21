@@ -40,7 +40,7 @@ docker compose up -d
 
 Create context to execute **Docker** commands as if you were on VPS.
 ```sh
-docker context create ispire --host=ssh;://<username>@<ip>
+docker context create ispire --host=ssh://<username>@<ip>:<port>
 ```
 
 Use that context.
