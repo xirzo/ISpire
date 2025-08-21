@@ -10,6 +10,7 @@ public abstract record RegisterResult
     public record WrongEmailPattern: RegisterResult;
     public record RepositoryAddFailed: RegisterResult;
     public record Success(Account Account) : RegisterResult;
+    public record ForbiddenCharactersInName : RegisterResult;
 }
 
 
@@ -33,6 +34,11 @@ public class AuthService
 
     public async Task<RegisterResult> Register(string name, string email, string password)
     {
+        if (Regex.Match(name,@"^[a-zA-Z0-9]*$") is not {Success: true})
+        {
+            return new RegisterResult.ForbiddenCharactersInName();
+        }
+        
         if (Regex.Match(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$") is not { Success: true })
         {
             return new RegisterResult.WrongEmailPattern();
