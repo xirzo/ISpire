@@ -56,6 +56,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(Permissions.Create, policy => policy.Requirements.Add(new PermissionRequirements(Permissions.Create)));
+    options.AddPolicy(Permissions.Read, policy => policy.Requirements.Add(new PermissionRequirements(Permissions.Delete)));
+    options.AddPolicy(Permissions.Update, policy => policy.Requirements.Add(new PermissionRequirements(Permissions.Delete)));
     options.AddPolicy(Permissions.Delete, policy => policy.Requirements.Add(new PermissionRequirements(Permissions.Delete)));
 });
 
