@@ -25,21 +25,15 @@ jobs:
         run: |
           docker context inspect vps || \
           docker context create vps --docker "host=${{ secrets.VPS_SSH_URL }}"
-      
-      - name: Build the frontend image
-        run: docker build -f Frontend/Dockerfile -t ghcr.io/xirzo/blog-frontend:latest Frontend
-
-      - name: Push the frontend image
-        run: docker push ghcr.io/xirzo/blog-frontend:latest
 
       - name: Build the backend image
-        run: docker build -f Backend/Blog.Web/Dockerfile -t ghcr.io/xirzo/blog-backend:latest Backend
+        run: docker build -f ISpire.Web/Dockerfile -t ghcr.io/xirzo/ispire-backend:latest .
 
       - name: Push the backend image
-        run: docker push ghcr.io/xirzo/blog-backend:latest
+        run: docker push ghcr.io/xirzo/ispire-backend:latest
 
       - name: Use VPS context
         run: docker context use vps
 
       - name: Deploy to VPS
-        run: docker stack deploy blog -c docker-stack.yaml --with-registry-auth
+        run: docker stack deploy ispire-backend -c docker-stack.yaml --with-registry-auth
