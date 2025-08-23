@@ -26,8 +26,16 @@ public class DbAccountRepository : IAccountRepository
         };
         
         await _dbContext.Accounts.AddAsync(account);
-        await _dbContext.SaveChangesAsync();
-        return account;
+
+        try
+        {
+            await _dbContext.SaveChangesAsync();
+            return account;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
     public async Task<Account?> FindByGuid(Guid guid)
