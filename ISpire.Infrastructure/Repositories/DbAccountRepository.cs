@@ -22,7 +22,7 @@ public class DbAccountRepository : IAccountRepository
             Name = name,
             Email = email,
             PasswordHash = passwordHash,
-            Permissions = [],
+            AccountPermissions = [],
         };
         
         await _dbContext.Accounts.AddAsync(account);
@@ -47,13 +47,17 @@ public class DbAccountRepository : IAccountRepository
 
     public async Task<ICollection<string>?> GetPermissionsByGuid(Guid guid)
     {
-        var account = await _dbContext.Accounts.FirstOrDefaultAsync(account => account.Guid == guid);
+        var account = await _dbContext.Accounts
+            .Include(a => a.AccountPermissions)
+            .FirstOrDefaultAsync(account => account.Guid == guid);
 
         if (account == null)
         {
             return null;
         }
         
-        return account.Permissions;
+        return account.AccountPermissions
+            .Select(p => p.PermissionName)
+            .ToList();
     }
 }
