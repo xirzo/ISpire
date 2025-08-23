@@ -17,6 +17,7 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new AccountConfiguration());
         modelBuilder.ApplyConfiguration(new SubjectConfiguration());
         modelBuilder.ApplyConfiguration(new TopicConfiguration());
+        modelBuilder.ApplyConfiguration(new AccountPermissionConfiguration());
         base.OnModelCreating(modelBuilder);
     }
 }
