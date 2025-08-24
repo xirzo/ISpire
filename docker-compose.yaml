@@ -1,15 +1,16 @@
 ﻿services:
   backend:
+    image: ispire.web:dev
     build:
       context: .
       dockerfile: ISpire.Web/Dockerfile.dev
-    image: ispire.web:dev
     ports:
       - "8041:8041"
     env_file:
         - .env
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - ./:/workspace
       - /workspace/ISpire.Web/bin
@@ -25,6 +26,11 @@
     shm_size: 128mb
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       POSTGRES_DB: dbname
       POSTGRES_USER: dbuser
