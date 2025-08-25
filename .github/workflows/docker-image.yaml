@@ -23,7 +23,6 @@ jobs:
 
       - name: Create context
         run: |
-          docker context inspect vps || \
           docker context create vps --docker "host=ssh://${{ secrets.HOST_USERNAME}}@${{ secrets.HOST_SSH_DOMAIN }}:${{ secrets.HOST_SSH_PORT }}"
 
       - name: Build the backend image
